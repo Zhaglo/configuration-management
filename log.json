@@ -1,0 +1,20 @@
+[
+    {
+        "timestamp": "2024-10-26 23:08:59",
+        "user": "igor",
+        "command": "cd virtual_fs",
+        "result": "Changed directory to /virtual_fs"
+    },
+    {
+        "timestamp": "2024-10-26 23:09:01",
+        "user": "igor",
+        "command": "cd",
+        "result": "Changed directory to /virtual_fs"
+    },
+    {
+        "timestamp": "2024-10-26 23:09:03",
+        "user": "igor",
+        "command": "ls",
+        "result": "user\ndownloads\nimages"
+    }
+]

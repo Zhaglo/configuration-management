@@ -1,0 +1,5 @@
+username,igor
+hostname,localhost
+start,start.txt
+zip_path,virtual_fs.zip
+log_path,log.json
