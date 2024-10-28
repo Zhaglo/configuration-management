@@ -1,20 +1,32 @@
 [
     {
-        "timestamp": "2024-10-26 23:08:59",
+        "timestamp": "2024-10-28 17:20:52",
         "user": "igor",
         "command": "cd virtual_fs",
-        "result": "Changed directory to /virtual_fs"
+        "result": "/virtual_fs"
     },
     {
-        "timestamp": "2024-10-26 23:09:01",
+        "timestamp": "2024-10-28 17:20:52",
         "user": "igor",
-        "command": "cd",
-        "result": "Changed directory to /virtual_fs"
+        "command": "cd virtual_fs",
+        "result": "Executed: cd virtual_fs"
     },
     {
-        "timestamp": "2024-10-26 23:09:03",
+        "timestamp": "2024-10-28 17:20:54",
         "user": "igor",
-        "command": "ls",
-        "result": "user\ndownloads\nimages"
+        "command": "cal",
+        "result": "    October 2024\nMo Tu We Th Fr Sa Su\n    1  2  3  4  5  6\n 7  8  9 10 11 12 13\n14 15 16 17 18 19 20\n21 22 23 24 25 26 27\n28 29 30 31\n"
+    },
+    {
+        "timestamp": "2024-10-28 17:20:55",
+        "user": "igor",
+        "command": "cal 12",
+        "result": "                                   12\n\n      January                   February                   March\nMo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su\n                   1             1  2  3  4  5                1  2  3  4\n 2  3  4  5  6  7  8       6  7  8  9 10 11 12       5  6  7  8  9 10 11\n 9 10 11 12 13 14 15      13 14 15 16 17 18 19      12 13 14 15 16 17 18\n16 17 18 19 20 21 22      20 21 22 23 24 25 26      19 20 21 22 23 24 25\n23 24 25 26 27 28 29      27 28 29                  26 27 28 29 30 31\n30 31\n\n       April                      May                       June\nMo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su\n                   1          1  2  3  4  5  6                   1  2  3\n 2  3  4  5  6  7  8       7  8  9 10 11 12 13       4  5  6  7  8  9 10\n 9 10 11 12 13 14 15      14 15 16 17 18 19 20      11 12 13 14 15 16 17\n16 17 18 19 20 21 22      21 22 23 24 25 26 27      18 19 20 21 22 23 24\n23 24 25 26 27 28 29      28 29 30 31               25 26 27 28 29 30\n30\n\n        July                     August                  September\nMo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su\n                   1             1  2  3  4  5                      1  2\n 2  3  4  5  6  7  8       6  7  8  9 10 11 12       3  4  5  6  7  8  9\n 9 10 11 12 13 14 15      13 14 15 16 17 18 19      10 11 12 13 14 15 16\n16 17 18 19 20 21 22      20 21 22 23 24 25 26      17 18 19 20 21 22 23\n23 24 25 26 27 28 29      27 28 29 30 31            24 25 26 27 28 29 30\n30 31\n\n      October                   November                  December\nMo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su\n 1  2  3  4  5  6  7                1  2  3  4                      1  2\n 8  9 10 11 12 13 14       5  6  7  8  9 10 11       3  4  5  6  7  8  9\n15 16 17 18 19 20 21      12 13 14 15 16 17 18      10 11 12 13 14 15 16\n22 23 24 25 26 27 28      19 20 21 22 23 24 25      17 18 19 20 21 22 23\n29 30 31                  26 27 28 29 30            24 25 26 27 28 29 30\n                                                    31\n"
+    },
+    {
+        "timestamp": "2024-10-28 17:21:05",
+        "user": "igor",
+        "command": "cal 12 2024",
+        "result": "   December 2024\nMo Tu We Th Fr Sa Su\n                   1\n 2  3  4  5  6  7  8\n 9 10 11 12 13 14 15\n16 17 18 19 20 21 22\n23 24 25 26 27 28 29\n30 31\n"
     }
 ]

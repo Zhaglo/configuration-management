@@ -8,21 +8,23 @@ import calendar
 import json
 import stat
 import tempfile
-import io
-class VCL:
+import time
+
+class Emulator:
     def __init__(self, config_path):
         self.config = self.load_config(config_path)
         self.currentpath = ""
         self.user = self.config['username']
         self.host = self.config['hostname']
         self.start_script = self.config['start']
-        self.filesystem = zipfile.ZipFile(self.config['zip_path'], 'a')
+        self.filesystem = zipfile.ZipFile(self.config['zip_path'].strip())
         self.filesystemlist = self.filesystem.filelist
         self.logfile = self.config['log_path']
         # Очищаем log.json в начале нового сеанса
         with open(self.logfile, 'w') as logfile:
             logfile.write('')  # Очищаем файл перед новым сеансом
         self.run_script()  # Вызов скрипта сразу после инициализации
+
     def load_config(self, config_path):
         config = {}
         with open(config_path, 'r') as file:
@@ -31,6 +33,7 @@ class VCL:
                 if len(row) == 2:  # Убедимся, что у нас есть пара (ключ, значение)
                     config[row[0]] = row[1]
         return config
+
     def log_command(self, command, result):
         log_entry = {
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -51,6 +54,7 @@ class VCL:
         # Перезаписываем файл с обновленным массивом
         with open(self.logfile, 'w') as logfile:
             json.dump(logs, logfile, indent=4, ensure_ascii=False)
+
     def start(self):
         while True:
             try:
@@ -67,7 +71,8 @@ class VCL:
                         result = "Usage: chmod <mode> <filename>"
                         print(result)
                 elif cmd[0].lower() == "echo":
-                    result = self.echo(cmd)  # Передаем срез, чтобы избежать лишних аргументов
+                    with zipfile.ZipFile(self.config['zip_path'], 'a') as zf:
+                        result = self.echo(cmd, zf)  # Передаем срез, чтобы избежать лишних аргументов
                 elif cmd[0].lower() == "cal":
                     if len(cmd) == 1:
                         result = self.cal()
@@ -86,6 +91,9 @@ class VCL:
                 self.log_command(' '.join(cmd), result)
             except Exception as e:
                 print(f'Some error: {e}')
+            finally:
+                self.close_filesystem()
+
     def ls(self, newpath: str):
         path = self.currentpath
         if "/root" in newpath:
@@ -115,10 +123,12 @@ class VCL:
                     displayed_files.add(files[0])
         print("\n".join(output))
         return "\n".join(output)
+
     def cd(self, newpath: str):
         if "/root" in newpath:
             newpath = newpath.replace('/root/', '')
-            if any(file.filename.startswith(newpath) for file in self.filesystemlist):
+            if any(file.filename == newpath + "/" or file.filename.startswith(newpath + "/") for file in
+                   self.filesystemlist):
                 self.currentpath = "/" + newpath
             else:
                 result = f'Directory "{newpath}" does not exist.'
@@ -130,20 +140,23 @@ class VCL:
             self.currentpath = ""
         elif newpath:
             new_path = self.currentpath + "/" + newpath if not newpath.startswith("/") else newpath
-            if any(file.filename.startswith(new_path.lstrip("/")) for file in self.filesystemlist):
-                self.currentpath = new_path
+            new_path = new_path.strip("/")
+            # Проверяем, что новая директория существует в точности
+            if any(file.filename == new_path + "/" or file.filename.startswith(new_path + "/") for file in
+                   self.filesystemlist):
+                self.currentpath = "/" + new_path
             else:
                 result = f'Directory "{newpath}" does not exist.'
                 print(result)
                 return result
         while "//" in self.currentpath:
             self.currentpath = self.currentpath.replace('//', '/')
-        return f"Changed directory to {self.currentpath}"
+        return self.currentpath
+
     def chmod(self, permissions, filename):
         # Нормализуем путь к текущей директории
         current_path_normalized = self.currentpath.lstrip('/')
         file_path = f"{current_path_normalized}/{filename}".replace("//", "/")
-        print(f"Checking permissions for {file_path}")  # Debug print
         # Проверка существования файла в ZIP-архиве
         file_exists = any(file.filename == file_path for file in self.filesystemlist)
         if not file_exists:
@@ -176,29 +189,38 @@ class VCL:
         else:
             new_permissions = int(permissions, 8)
         # Логирование изменений только один раз
-        result = f"Permissions for {filename} set to {permissions} (simulated)"
+        result = f"Permissions for {filename} set to {permissions}"
         print(result)
         self.log_command(f"chmod {permissions} {filename}", result)
         return result
+
     def cal(self, month=None, year=None):
         try:
             if month is None and year is None:
+                # No arguments: show current month and year
                 month = datetime.now().month
                 year = datetime.now().year
                 result = calendar.month(year, month)
                 print(result)
             elif month is not None and year is None:
-                if len(month) == 4 and month.isdigit():
+                # Check if the input is a 4-digit number (indicating a year)
+                if month.isdigit() and len(month) == 4:
                     year = int(month)
-                    result = calendar.calendar(year)
+                    result = calendar.calendar(year)  # Output the full calendar for the year
                     print(result)
                 else:
-                    result = "Usage: cal [month] [year]"
-                    print(result)
+                    # Treat input as a year if a valid integer within a reasonable range
+                    year = int(month)
+                    if 1 <= year <= 9999:  # Assuming any integer input is a year
+                        result = calendar.calendar(year)
+                        print(result)
+                    else:
+                        result = "Invalid input: Please enter a valid month or year"
+                        print(result)
             elif month is not None and year is not None:
                 month = int(month)
                 year = int(year)
-                result = calendar.month(year, month)
+                result = calendar.month(year, month)  # Output the specific month of the specified year
                 print(result)
             else:
                 result = "Usage: cal [month] [year]"
@@ -207,36 +229,105 @@ class VCL:
             result = f"Invalid input: {e}"
             print(result)
         return result
-    def echo(self, cmd):
+
+    def echo(self, cmd, zf=None):
         interpret_escape_sequences = False
         add_newline = True
-        args = []
+        output = ""
+        file_mode = None
+        file_path = None
+        result = ""
+
         i = 1
         while i < len(cmd):
             if cmd[i] == '-n':
                 add_newline = False
             elif cmd[i] == '-e':
                 interpret_escape_sequences = True
-            else:
-                args = cmd[i:]
+            elif cmd[i] == '>':
+                file_mode = 'w'  # Write mode
+                if i + 1 < len(cmd):
+                    file_path = cmd[i + 1]
                 break
+            elif cmd[i] == '>>':
+                file_mode = 'a'  # Append mode
+                if i + 1 < len(cmd):
+                    file_path = cmd[i + 1]
+                break
+            else:
+                output += cmd[i] + " "
             i += 1
-        output = " ".join(args)
+
         if interpret_escape_sequences:
             output = output.replace("\\n", "\n").replace("\\t", "\t").replace("\\a", "\a").replace("\\\\", "\\")
-        if add_newline:
-            print(output)
+
+        if file_path:
+            file_path = self.currentpath.lstrip("/") + "/" + file_path if not file_path.startswith(
+                "/") else file_path.lstrip("/")
+            temp_zip_path = tempfile.mktemp()
+
+            try:
+                existing_content = ""
+                if file_mode == 'a':
+                    try:
+                        with zipfile.ZipFile(self.config['zip_path'], 'r') as zip_ref:
+                            with zip_ref.open(file_path) as file:
+                                existing_content = file.read().decode('utf-8')
+                    except KeyError:
+                        pass
+
+                output = existing_content + output
+
+                # Закрытие текущего архива перед записью
+                if self.filesystem:
+                    self.filesystem.close()
+
+                with zipfile.ZipFile(self.config['zip_path'], 'r') as old_zip:
+                    with zipfile.ZipFile(temp_zip_path, 'w') as new_zip:
+                        for item in old_zip.infolist():
+                            if item.filename != file_path:
+                                new_zip.writestr(item, old_zip.read(item.filename))
+
+                        new_zip.writestr(file_path, output.encode('utf-8'))
+
+                time.sleep(0.1)  # Минимальная задержка, чтобы ОС освободила файловый дескриптор
+
+                # Заменяем старый ZIP новым
+                os.replace(temp_zip_path, self.config['zip_path'])
+
+                # Переоткрываем обновленный ZIP-файл
+                self.filesystem = zipfile.ZipFile(self.config['zip_path'], 'r')
+                self.filesystemlist = self.filesystem.filelist
+
+                result = f"Text written to {file_path}"
+                print(result)
+            except PermissionError:
+                print(
+                    "Some error: Unable to write to file due to permission issues. Try closing any open instances of the ZIP archive.")
+            except Exception as e:
+                print(f"Some error: {e}")
+            finally:
+                # Удаляем временный файл, если он существует
+                if os.path.exists(temp_zip_path):
+                    os.remove(temp_zip_path)
         else:
-            print(output, end='')
-        return output
+            print(output, end='' if not add_newline else '\n')
+            result = output.strip()
+
+        self.log_command(" ".join(cmd), result)
+        return result
+
     def run_script(self):
         script_file = self.start_script
         try:
             with open(script_file, 'r') as file:
                 for line in file:
-                    self.execute_command(line.strip())
+                    line = line.strip()
+                    self.execute_command(line)
+                    self.log_command(line, f"Executed: {line}")
         except FileNotFoundError:
             print(f"Script file '{script_file}' not found.")
+
     def execute_command(self, command: str):
         cmd = shlex.split(command)
         result = None
@@ -255,12 +346,15 @@ class VCL:
         else:
             print('Unknown command.')
         self.log_command(command, result)
+
     def close_filesystem(self):
-        self.filesystem.close()  # Метод для закрытия ZIP-файла, когда он больше не нужен
+        if self.filesystem:
+            self.filesystem.close()  # Метод для закрытия ZIP-файла, когда он больше не нужен
+
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print("Usage: python script.py <config_file>")
         sys.exit(1)
-    vcl = VCL(sys.argv[1])
+    vcl = Emulator(sys.argv[1])
     vcl.start()
     vcl.close_filesystem()
