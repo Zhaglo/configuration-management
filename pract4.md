@@ -183,3 +183,100 @@ Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
 To C:/Users/Пользователь/test_f/server.git
    d851de6..a86d882  master -> master
 ~~~
+
+### ЗАДАНИЕ 4.
+
+---
+
+Написать программу на Питоне (или другом ЯП), которая выводит список содержимого всех объектов репозитория. Воспользоваться командой "git cat-file -p". Идеальное решение – не использовать иных сторонних команд и библиотек для работы с git.
+
+~~~python
+import subprocess
+
+def get_git_objects():
+    # Получаем список всех объектов (хешей) в репозитории
+    result = subprocess.run(["git", "rev-list", "--all", "--objects"], capture_output=True, text=True)
+    if result.returncode != 0:
+        print("Ошибка при получении списка объектов:", result.stderr)
+        return []
+    # Парсим вывод и извлекаем хеши объектов
+    return [line.split()[0] for line in result.stdout.splitlines() if line]
+
+def show_object_content(obj_hash):
+    # Выводим содержимое объекта с помощью git cat-file -p
+    result = subprocess.run(["git", "cat-file", "-p", obj_hash], capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"Ошибка при выводе содержимого объекта {obj_hash}:", result.stderr)
+    else:
+        print(f"\n--- Содержимое объекта {obj_hash} ---\n")
+        print(result.stdout)
+
+def main():
+    # Получаем все объекты и выводим их содержимое
+    objects = get_git_objects()
+    for obj_hash in objects:
+        show_object_content(obj_hash)
+
+if __name__ == "__main__":
+    main()
+~~~
+Пример вывода программы:
+~~~
+--- Содержимое объекта cbacfd40f47dec909035d3481a5eef9e539c6bb1 ---
+
+tree e9145164cdf6968c0420d1565d490a258441c5c5
+parent 44cf87a125a9353b5b9437095fd8387fab49a017
+author Zhaglo <jagloik@gmail.com> 1731255312 +0300
+committer Zhaglo <jagloik@gmail.com> 1731255312 +0300
+
+pract4_3
+
+
+--- Содержимое объекта 44cf87a125a9353b5b9437095fd8387fab49a017 ---
+
+tree 5a5c9fe7980344bdffd4e0f1c0dd92e03ab6e0e7
+parent 35f4551e3a0273ee39f0e892a38a2896e46bb137
+parent 88ad306543151ad12dc8d3b203a29e14d4050f77
+author Zhaglo <jagloik@gmail.com> 1731253650 +0300
+committer Zhaglo <jagloik@gmail.com> 1731253650 +0300
+
+Merge remote-tracking branch 'origin/master'
+
+
+--- Содержимое объекта 35f4551e3a0273ee39f0e892a38a2896e46bb137 ---
+
+tree 5a5c9fe7980344bdffd4e0f1c0dd92e03ab6e0e7
+parent 070b3cb4c311870591459d72fa31cadacab304f6
+author Zhaglo <jagloik@gmail.com> 1731253627 +0300
+committer Zhaglo <jagloik@gmail.com> 1731253627 +0300
+
+pract4_2
+
+
+--- Содержимое объекта 88ad306543151ad12dc8d3b203a29e14d4050f77 ---
+
+tree b3bf66a5b7b7d477d3a421cef8573ff719e6b08c
+parent 5f642a66b500d8f2f2864cc80055c17227fc786e
+parent 070b3cb4c311870591459d72fa31cadacab304f6
+author Zhaglo <147069106+Zhaglo@users.noreply.github.com> 1730125614 +0300
+committer GitHub <noreply@github.com> 1730125614 +0300
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJnH58uCRC1aQ7uu5UhlAAAXVQQAK5a0IsmoQXuGwCBxQzfsp67
+ qRkssMggp0sOR/a+Xfp0KtzY6uPJeNJvgeHET7KI0Pl8Reg6bzu+frdO6ItUlTKe
+ FDrOUd6BRey35Yz9M1wvThBBJGMWQKrJIdRc4pgfKv8+/kaQw5PSao63lB7ZeJoV
+ yij2zyGoahTFPNUws0CeAdEiERN24VB+xQV6DZ6vq/H9ZHrlgyz9n0+ap1kaXQrf
+ XOGMlVXaJXQtYC/Aph8WUU9e9JoWwm28ADG2WljpDoCAg5xvrNfKrCE3i9mJuZ/Z
+ lv4m/Q99htVtdcnC+RDCF9F1ugTsvbD11lr/aV8+8G/AdAxJvbWbAKs0+TeKQNKC
+ VxhMvphs7r3JTs6U9APSvwcqgwCpfEuyrwbnlXTcWxToSp0E0YCFt1zqiYU38X5B
+ UfJ5AtJS/qJ002rDKjKBFHD9HgqgVyaPSz9/1+H2s2dDLtvaz63vJyxfCaevSVgO
+ D4ve9z+RhnVjWLkYfjPbuaPVUXIlNt7eCtAoNgpvqcw3+gxlzZhFfvuA4j8asl84
+ f9jHfafMC+hmraXiDF1M8/jP4NlKGzoDPyHziAak/G1RcyQr9y+U0ECoF+3QTRuo
+ qtMzciHWGoi4Za22DLXoJ4Ys+0pXrlZ4GQrB6lR3uqK4P8GTqcQ6wajJFCbXmsTO
+ luzqi2clUdiPyt4ZG/Xc
+ =4goc
+ -----END PGP SIGNATURE-----
+ 
+
+Merge pull request #1 from Zhaglo/main
+~~~
