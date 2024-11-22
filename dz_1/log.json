@@ -1,32 +1,188 @@
 [
     {
-        "timestamp": "2024-10-28 17:20:52",
+        "timestamp": "2024-10-28 17:28:35",
         "user": "igor",
         "command": "cd virtual_fs",
         "result": "/virtual_fs"
     },
     {
-        "timestamp": "2024-10-28 17:20:52",
+        "timestamp": "2024-10-28 17:28:35",
         "user": "igor",
         "command": "cd virtual_fs",
         "result": "Executed: cd virtual_fs"
     },
     {
-        "timestamp": "2024-10-28 17:20:54",
+        "timestamp": "2024-10-28 17:29:04",
+        "user": "igor",
+        "command": "",
+        "result": "Unknown command."
+    },
+    {
+        "timestamp": "2024-10-28 17:29:05",
+        "user": "igor",
+        "command": " ",
+        "result": "Unknown command."
+    },
+    {
+        "timestamp": "2024-10-28 17:29:06",
+        "user": "igor",
+        "command": "gfhjl;",
+        "result": "Unknown command."
+    },
+    {
+        "timestamp": "2024-10-28 17:29:08",
+        "user": "igor",
+        "command": "ls",
+        "result": "user\ndownloads\nimages"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:09",
+        "user": "igor",
+        "command": "cd",
+        "result": "/virtual_fs"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:10",
+        "user": "igor",
+        "command": "cd ..",
+        "result": "/"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:11",
+        "user": "igor",
+        "command": "cd ..",
+        "result": "/"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:12",
+        "user": "igor",
+        "command": "cd ..",
+        "result": "/"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:12",
+        "user": "igor",
+        "command": "ls",
+        "result": "virtual_fs"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:18",
+        "user": "igor",
+        "command": "cd //",
+        "result": "Directory \"//\" does not exist."
+    },
+    {
+        "timestamp": "2024-10-28 17:29:20",
+        "user": "igor",
+        "command": "cd ./",
+        "result": "Directory \"./\" does not exist."
+    },
+    {
+        "timestamp": "2024-10-28 17:29:22",
+        "user": "igor",
+        "command": "cd ..///",
+        "result": "Directory \"..///\" does not exist."
+    },
+    {
+        "timestamp": "2024-10-28 17:29:24",
+        "user": "igor",
+        "command": "ls",
+        "result": "virtual_fs"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:31",
+        "user": "igor",
+        "command": "cd virtual_fs",
+        "result": "/virtual_fs"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:32",
+        "user": "igor",
+        "command": "ls",
+        "result": "user\ndownloads\nimages"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:36",
         "user": "igor",
         "command": "cal",
         "result": "    October 2024\nMo Tu We Th Fr Sa Su\n    1  2  3  4  5  6\n 7  8  9 10 11 12 13\n14 15 16 17 18 19 20\n21 22 23 24 25 26 27\n28 29 30 31\n"
     },
     {
-        "timestamp": "2024-10-28 17:20:55",
+        "timestamp": "2024-10-28 17:29:40",
         "user": "igor",
-        "command": "cal 12",
-        "result": "                                   12\n\n      January                   February                   March\nMo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su\n                   1             1  2  3  4  5                1  2  3  4\n 2  3  4  5  6  7  8       6  7  8  9 10 11 12       5  6  7  8  9 10 11\n 9 10 11 12 13 14 15      13 14 15 16 17 18 19      12 13 14 15 16 17 18\n16 17 18 19 20 21 22      20 21 22 23 24 25 26      19 20 21 22 23 24 25\n23 24 25 26 27 28 29      27 28 29                  26 27 28 29 30 31\n30 31\n\n       April                      May                       June\nMo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su\n                   1          1  2  3  4  5  6                   1  2  3\n 2  3  4  5  6  7  8       7  8  9 10 11 12 13       4  5  6  7  8  9 10\n 9 10 11 12 13 14 15      14 15 16 17 18 19 20      11 12 13 14 15 16 17\n16 17 18 19 20 21 22      21 22 23 24 25 26 27      18 19 20 21 22 23 24\n23 24 25 26 27 28 29      28 29 30 31               25 26 27 28 29 30\n30\n\n        July                     August                  September\nMo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su\n                   1             1  2  3  4  5                      1  2\n 2  3  4  5  6  7  8       6  7  8  9 10 11 12       3  4  5  6  7  8  9\n 9 10 11 12 13 14 15      13 14 15 16 17 18 19      10 11 12 13 14 15 16\n16 17 18 19 20 21 22      20 21 22 23 24 25 26      17 18 19 20 21 22 23\n23 24 25 26 27 28 29      27 28 29 30 31            24 25 26 27 28 29 30\n30 31\n\n      October                   November                  December\nMo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su\n 1  2  3  4  5  6  7                1  2  3  4                      1  2\n 8  9 10 11 12 13 14       5  6  7  8  9 10 11       3  4  5  6  7  8  9\n15 16 17 18 19 20 21      12 13 14 15 16 17 18      10 11 12 13 14 15 16\n22 23 24 25 26 27 28      19 20 21 22 23 24 25      17 18 19 20 21 22 23\n29 30 31                  26 27 28 29 30            24 25 26 27 28 29 30\n                                                    31\n"
+        "command": "cal 2024",
+        "result": "                                  2024\n\n      January                   February                   March\nMo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su\n 1  2  3  4  5  6  7                1  2  3  4                   1  2  3\n 8  9 10 11 12 13 14       5  6  7  8  9 10 11       4  5  6  7  8  9 10\n15 16 17 18 19 20 21      12 13 14 15 16 17 18      11 12 13 14 15 16 17\n22 23 24 25 26 27 28      19 20 21 22 23 24 25      18 19 20 21 22 23 24\n29 30 31                  26 27 28 29               25 26 27 28 29 30 31\n\n       April                      May                       June\nMo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su\n 1  2  3  4  5  6  7             1  2  3  4  5                      1  2\n 8  9 10 11 12 13 14       6  7  8  9 10 11 12       3  4  5  6  7  8  9\n15 16 17 18 19 20 21      13 14 15 16 17 18 19      10 11 12 13 14 15 16\n22 23 24 25 26 27 28      20 21 22 23 24 25 26      17 18 19 20 21 22 23\n29 30                     27 28 29 30 31            24 25 26 27 28 29 30\n\n        July                     August                  September\nMo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su\n 1  2  3  4  5  6  7                1  2  3  4                         1\n 8  9 10 11 12 13 14       5  6  7  8  9 10 11       2  3  4  5  6  7  8\n15 16 17 18 19 20 21      12 13 14 15 16 17 18       9 10 11 12 13 14 15\n22 23 24 25 26 27 28      19 20 21 22 23 24 25      16 17 18 19 20 21 22\n29 30 31                  26 27 28 29 30 31         23 24 25 26 27 28 29\n                                                    30\n\n      October                   November                  December\nMo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su\n    1  2  3  4  5  6                   1  2  3                         1\n 7  8  9 10 11 12 13       4  5  6  7  8  9 10       2  3  4  5  6  7  8\n14 15 16 17 18 19 20      11 12 13 14 15 16 17       9 10 11 12 13 14 15\n21 22 23 24 25 26 27      18 19 20 21 22 23 24      16 17 18 19 20 21 22\n28 29 30 31               25 26 27 28 29 30         23 24 25 26 27 28 29\n                                                    30 31\n"
     },
     {
-        "timestamp": "2024-10-28 17:21:05",
+        "timestamp": "2024-10-28 17:29:44",
         "user": "igor",
         "command": "cal 12 2024",
         "result": "   December 2024\nMo Tu We Th Fr Sa Su\n                   1\n 2  3  4  5  6  7  8\n 9 10 11 12 13 14 15\n16 17 18 19 20 21 22\n23 24 25 26 27 28 29\n30 31\n"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:46",
+        "user": "igor",
+        "command": "echo fgdg",
+        "result": "fgdg"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:46",
+        "user": "igor",
+        "command": "echo fgdg",
+        "result": "fgdg"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:49",
+        "user": "igor",
+        "command": "echo -n gfd",
+        "result": "gfd"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:49",
+        "user": "igor",
+        "command": "echo -n gfd",
+        "result": "gfd"
+    },
+    {
+        "timestamp": "2024-10-28 17:29:51",
+        "user": "igor",
+        "command": "echo",
+        "result": ""
+    },
+    {
+        "timestamp": "2024-10-28 17:29:51",
+        "user": "igor",
+        "command": "echo",
+        "result": ""
+    },
+    {
+        "timestamp": "2024-10-28 17:30:00",
+        "user": "igor",
+        "command": "echo -e gdf\\ngfd\\tgfd",
+        "result": "gdf\ngfd\tgfd"
+    },
+    {
+        "timestamp": "2024-10-28 17:30:00",
+        "user": "igor",
+        "command": "echo -e gdf\\ngfd\\tgfd",
+        "result": "gdf\ngfd\tgfd"
+    },
+    {
+        "timestamp": "2024-10-28 17:30:13",
+        "user": "igor",
+        "command": "cd user/Files",
+        "result": "/virtual_fs/user/Files"
+    },
+    {
+        "timestamp": "2024-10-28 17:30:19",
+        "user": "igor",
+        "command": "chmod u+x ltest1.txt",
+        "result": "Permissions for ltest1.txt set to u+x"
+    },
+    {
+        "timestamp": "2024-10-28 17:30:19",
+        "user": "igor",
+        "command": "chmod u+x ltest1.txt",
+        "result": "Permissions for ltest1.txt set to u+x"
     }
 ]
