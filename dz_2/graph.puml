@@ -1,0 +1,199 @@
+@startuml
+node "org_apache_commons_commons_lang3_3_12_0" as org_apache_commons_commons_lang3_3_12_0
+node "org_junit" as org_junit
+org_apache_commons_commons_lang3_3_12_0 --> org_junit
+node "junit_bom:5_7_1" as junit_bom_5_7_1
+org_junit --> junit_bom_5_7_1
+node "junit_jupiter:5_7_1" as junit_jupiter_5_7_1
+org_junit --> junit_jupiter_5_7_1
+node "junit_jupiter_api:5_7_1" as junit_jupiter_api_5_7_1
+org_junit --> junit_jupiter_api_5_7_1
+node "junit_jupiter_engine:5_7_1" as junit_jupiter_engine_5_7_1
+org_junit --> junit_jupiter_engine_5_7_1
+node "junit_jupiter_migrationsupport:5_7_1" as junit_jupiter_migrationsupport_5_7_1
+org_junit --> junit_jupiter_migrationsupport_5_7_1
+node "junit_jupiter_params:5_7_1" as junit_jupiter_params_5_7_1
+org_junit --> junit_jupiter_params_5_7_1
+node "junit_platform_commons:1_7_1" as junit_platform_commons_1_7_1
+org_junit --> junit_platform_commons_1_7_1
+node "junit_platform_console:1_7_1" as junit_platform_console_1_7_1
+org_junit --> junit_platform_console_1_7_1
+node "junit_platform_engine:1_7_1" as junit_platform_engine_1_7_1
+org_junit --> junit_platform_engine_1_7_1
+node "junit_platform_jfr:1_7_1" as junit_platform_jfr_1_7_1
+org_junit --> junit_platform_jfr_1_7_1
+node "junit_platform_launcher:1_7_1" as junit_platform_launcher_1_7_1
+org_junit --> junit_platform_launcher_1_7_1
+node "junit_platform_reporting:1_7_1" as junit_platform_reporting_1_7_1
+org_junit --> junit_platform_reporting_1_7_1
+node "junit_platform_runner:1_7_1" as junit_platform_runner_1_7_1
+org_junit --> junit_platform_runner_1_7_1
+node "junit_platform_suite_api:1_7_1" as junit_platform_suite_api_1_7_1
+org_junit --> junit_platform_suite_api_1_7_1
+node "junit_platform_testkit:1_7_1" as junit_platform_testkit_1_7_1
+org_junit --> junit_platform_testkit_1_7_1
+node "junit_vintage_engine:5_7_1" as junit_vintage_engine_5_7_1
+org_junit --> junit_vintage_engine_5_7_1
+node "org_junit_pioneer" as org_junit_pioneer
+org_apache_commons_commons_lang3_3_12_0 --> org_junit_pioneer
+node "junit_pioneer:1_3_0" as junit_pioneer_1_3_0
+org_junit_pioneer --> junit_pioneer_1_3_0
+node "junit_bom:5_5_2" as junit_bom_5_5_2
+org_junit_pioneer --> junit_bom_5_5_2
+node "org_hamcrest" as org_hamcrest
+org_apache_commons_commons_lang3_3_12_0 --> org_hamcrest
+node "hamcrest:2_2" as hamcrest_2_2
+org_hamcrest --> hamcrest_2_2
+node "org_easymock" as org_easymock
+org_apache_commons_commons_lang3_3_12_0 --> org_easymock
+node "easymock:4_2" as easymock_4_2
+org_easymock --> easymock_4_2
+node "surefire_junit_platform:3_0_0_M4" as surefire_junit_platform_3_0_0_M4
+org_easymock --> surefire_junit_platform_3_0_0_M4
+node "objenesis:3_1" as objenesis_3_1
+org_easymock --> objenesis_3_1
+node "dexmaker:1_5" as dexmaker_1_5
+org_easymock --> dexmaker_1_5
+node "junit_jupiter:5_6_0" as junit_jupiter_5_6_0
+org_easymock --> junit_jupiter_5_6_0
+node "junit_vintage_engine:5_6_0" as junit_vintage_engine_5_6_0
+org_easymock --> junit_vintage_engine_5_6_0
+node "junit:4_13" as junit_4_13
+org_easymock --> junit_4_13
+node "testng:7_1_0" as testng_7_1_0
+org_easymock --> testng_7_1_0
+node "org_openjdk_jmh" as org_openjdk_jmh
+org_apache_commons_commons_lang3_3_12_0 --> org_openjdk_jmh
+node "jmh_core:1_27" as jmh_core_1_27
+org_openjdk_jmh --> jmh_core_1_27
+node "jmh_generator_annprocess:1_27" as jmh_generator_annprocess_1_27
+org_openjdk_jmh --> jmh_generator_annprocess_1_27
+node "com_google_code_findbugs" as com_google_code_findbugs
+org_apache_commons_commons_lang3_3_12_0 --> com_google_code_findbugs
+node "jsr305:3_0_2" as jsr305_3_0_2
+com_google_code_findbugs --> jsr305_3_0_2
+node "com_puppycrawl_tools" as com_puppycrawl_tools
+org_apache_commons_commons_lang3_3_12_0 --> com_puppycrawl_tools
+node "checkstyle:8_40" as checkstyle_8_40
+com_puppycrawl_tools --> checkstyle_8_40
+node "archunit_junit5:0_15_0" as archunit_junit5_0_15_0
+com_puppycrawl_tools --> archunit_junit5_0_15_0
+node "picocli:4_6_1" as picocli_4_6_1
+com_puppycrawl_tools --> picocli_4_6_1
+node "antlr:2_7_7" as antlr_2_7_7
+com_puppycrawl_tools --> antlr_2_7_7
+node "antlr4_runtime:4_9_1" as antlr4_runtime_4_9_1
+com_puppycrawl_tools --> antlr4_runtime_4_9_1
+node "commons_beanutils:1_9_4" as commons_beanutils_1_9_4
+com_puppycrawl_tools --> commons_beanutils_1_9_4
+node "guava:30_0_jre" as guava_30_0_jre
+com_puppycrawl_tools --> guava_30_0_jre
+node "ant:1_10_9" as ant_1_10_9
+com_puppycrawl_tools --> ant_1_10_9
+node "reflections:0_9_12" as reflections_0_9_12
+com_puppycrawl_tools --> reflections_0_9_12
+node "junit_jupiter_api:5_7_0" as junit_jupiter_api_5_7_0
+com_puppycrawl_tools --> junit_jupiter_api_5_7_0
+node "junit_jupiter_engine:5_7_0" as junit_jupiter_engine_5_7_0
+com_puppycrawl_tools --> junit_jupiter_engine_5_7_0
+node "junit5_system_extensions:1_1_0" as junit5_system_extensions_1_1_0
+com_puppycrawl_tools --> junit5_system_extensions_1_1_0
+node "junit_vintage_engine:5_7_0" as junit_vintage_engine_5_7_0
+com_puppycrawl_tools --> junit_vintage_engine_5_7_0
+node "truth:1_1_2" as truth_1_1_2
+com_puppycrawl_tools --> truth_1_1_2
+node "system_rules:1_19_0" as system_rules_1_19_0
+com_puppycrawl_tools --> system_rules_1_19_0
+node "equalsverifier:3_5_2" as equalsverifier_3_5_2
+com_puppycrawl_tools --> equalsverifier_3_5_2
+node "powermock_api_mockito2:2_0_9" as powermock_api_mockito2_2_0_9
+com_puppycrawl_tools --> powermock_api_mockito2_2_0_9
+node "powermock_module_junit4:2_0_9" as powermock_module_junit4_2_0_9
+com_puppycrawl_tools --> powermock_module_junit4_2_0_9
+node "commons_io:2_8_0" as commons_io_2_8_0
+com_puppycrawl_tools --> commons_io_2_8_0
+node "org_eclipse_jgit:5_10_0_202012080955_r" as org_eclipse_jgit_5_10_0_202012080955_r
+com_puppycrawl_tools --> org_eclipse_jgit_5_10_0_202012080955_r
+node "slf4j_simple:1_7_30" as slf4j_simple_1_7_30
+com_puppycrawl_tools --> slf4j_simple_1_7_30
+node "org_jacoco_agent:0_8_6" as org_jacoco_agent_0_8_6
+com_puppycrawl_tools --> org_jacoco_agent_0_8_6
+node "Saxon_HE:10_3" as Saxon_HE_10_3
+com_puppycrawl_tools --> Saxon_HE_10_3
+node "pitest_junit5_plugin:0_12" as pitest_junit5_plugin_0_12
+com_puppycrawl_tools --> pitest_junit5_plugin_0_12
+node "pmd_java:6_30_0" as pmd_java_6_30_0
+com_puppycrawl_tools --> pmd_java_6_30_0
+node "pmd_core:6_30_0" as pmd_core_6_30_0
+com_puppycrawl_tools --> pmd_core_6_30_0
+node "pmd_javascript:6_30_0" as pmd_javascript_6_30_0
+com_puppycrawl_tools --> pmd_javascript_6_30_0
+node "pmd_jsp:6_30_0" as pmd_jsp_6_30_0
+com_puppycrawl_tools --> pmd_jsp_6_30_0
+node "sevntu_checks:1_38_0" as sevntu_checks_1_38_0
+com_puppycrawl_tools --> sevntu_checks_1_38_0
+node "checkstyle:8_29" as checkstyle_8_29
+com_puppycrawl_tools --> checkstyle_8_29
+node "ant_nodeps:1_8_1" as ant_nodeps_1_8_1
+com_puppycrawl_tools --> ant_nodeps_1_8_1
+node "org_eclipse_jdt_annotation:2_2_600" as org_eclipse_jdt_annotation_2_2_600
+com_puppycrawl_tools --> org_eclipse_jdt_annotation_2_2_600
+node "com_github_spotbugs" as com_github_spotbugs
+org_apache_commons_commons_lang3_3_12_0 --> com_github_spotbugs
+node "spotbugs:4_2_1" as spotbugs_4_2_1
+com_github_spotbugs --> spotbugs_4_2_1
+node "asm:9_0" as asm_9_0
+com_github_spotbugs --> asm_9_0
+node "asm_analysis:9_0" as asm_analysis_9_0
+com_github_spotbugs --> asm_analysis_9_0
+node "asm_commons:9_0" as asm_commons_9_0
+com_github_spotbugs --> asm_commons_9_0
+node "asm_tree:9_0" as asm_tree_9_0
+com_github_spotbugs --> asm_tree_9_0
+node "asm_util:9_0" as asm_util_9_0
+com_github_spotbugs --> asm_util_9_0
+node "bcel:6_5_0" as bcel_6_5_0
+com_github_spotbugs --> bcel_6_5_0
+node "jcip_annotations:1_0" as jcip_annotations_1_0
+com_github_spotbugs --> jcip_annotations_1_0
+node "dom4j:2_1_3" as dom4j_2_1_3
+com_github_spotbugs --> dom4j_2_1_3
+node "commons_lang3:3_11" as commons_lang3_3_11
+com_github_spotbugs --> commons_lang3_3_11
+node "commons_text:1_9" as commons_text_1_9
+com_github_spotbugs --> commons_text_1_9
+node "slf4j_api:1_8_0_beta4" as slf4j_api_1_8_0_beta4
+com_github_spotbugs --> slf4j_api_1_8_0_beta4
+node "spotbugs_annotations:4_2_1" as spotbugs_annotations_4_2_1
+com_github_spotbugs --> spotbugs_annotations_4_2_1
+node "json:20201115" as json_20201115
+com_github_spotbugs --> json_20201115
+node "jaxen:1_2_0" as jaxen_1_2_0
+com_github_spotbugs --> jaxen_1_2_0
+node "biz_aQute_bnd" as biz_aQute_bnd
+org_apache_commons_commons_lang3_3_12_0 --> biz_aQute_bnd
+node "biz_aQute_bndlib:5_3_0" as biz_aQute_bndlib_5_3_0
+biz_aQute_bnd --> biz_aQute_bndlib_5_3_0
+node "osgi_annotation:8_0_0" as osgi_annotation_8_0_0
+biz_aQute_bnd --> osgi_annotation_8_0_0
+node "osgi_core:6_0_0" as osgi_core_6_0_0
+biz_aQute_bnd --> osgi_core_6_0_0
+node "org_osgi_namespace_contract:1_0_0" as org_osgi_namespace_contract_1_0_0
+biz_aQute_bnd --> org_osgi_namespace_contract_1_0_0
+node "org_osgi_namespace_extender:1_0_1" as org_osgi_namespace_extender_1_0_1
+biz_aQute_bnd --> org_osgi_namespace_extender_1_0_1
+node "org_osgi_namespace_implementation:1_0_0" as org_osgi_namespace_implementation_1_0_0
+biz_aQute_bnd --> org_osgi_namespace_implementation_1_0_0
+node "org_osgi_namespace_service:1_0_0" as org_osgi_namespace_service_1_0_0
+biz_aQute_bnd --> org_osgi_namespace_service_1_0_0
+node "org_osgi_service_log:1_3_0" as org_osgi_service_log_1_3_0
+biz_aQute_bnd --> org_osgi_service_log_1_3_0
+node "org_osgi_service_repository:1_1_0" as org_osgi_service_repository_1_1_0
+biz_aQute_bnd --> org_osgi_service_repository_1_1_0
+node "org_osgi_util_function:1_1_0" as org_osgi_util_function_1_1_0
+biz_aQute_bnd --> org_osgi_util_function_1_1_0
+node "org_osgi_util_promise:1_1_1" as org_osgi_util_promise_1_1_1
+biz_aQute_bnd --> org_osgi_util_promise_1_1_1
+node "slf4j_api:1_7_25" as slf4j_api_1_7_25
+biz_aQute_bnd --> slf4j_api_1_7_25
+@enduml
