@@ -20,6 +20,12 @@ python -m venv .venv
 source .venv/bin/activate  # для Linux/macOS
 .venv\Scripts\activate  # для Windows
 ~~~
+
+Клонируйте репозиторий или загрузите файл с исходным кодом:
+
+~~~bash
+git clone https://github.com/Zhaglo/configuration-management/tree/master/dz_2
+~~~
 Затем установите все необходимые зависимости:
 
 ~~~bash
