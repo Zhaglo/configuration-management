@@ -24,7 +24,7 @@ Shell Emulator — это эмулятор командной оболочки, 
 1. Клонируйте репозиторий или загрузите файл с исходным кодом:
 
 ~~~bash
-git clone https://example.com/shell-emulator.git
+git clone https://github.com/Zhaglo/configuration-management/tree/master/dz_1
 ~~~
 2. Установите все зависимости:
 
