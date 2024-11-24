@@ -1,6 +1,18 @@
 <?xml version="1.0" ?>
 <config>
     <variable name="x">10</variable>
-    <variable name="y">20</variable>
-    <variable name="name">John</variable>
+    <variable name="y">15</variable>
+    <variable name="z">25</variable>
+    <variable name="add">25</variable>
+    <variable name="sub">-5</variable>
+    <variable name="mult">150</variable>
+    <variable name="div">0.6666666666666666</variable>
+    <variable name="arr">
+        <array>
+            <item>10</item>
+            <item>15</item>
+            <item>25</item>
+        </array>
+    </variable>
+    <variable name="max">25</variable>
 </config>

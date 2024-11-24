@@ -1,3 +1,9 @@
 x is 10
-y is 20
-name is "John"
+y is 15
+z is ![x + y]
+add is ![x + y]
+sub is ![x - y]
+mult is ![x * y]
+div is ![x / y]
+arr is #(x, y, z)
+max is ![max(arr)]

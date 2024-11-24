@@ -6,14 +6,41 @@ from xml.dom import minidom
 # Функция для вычисления выражений
 def evaluate_expression(expr, variables):
     expr = expr.strip('![]')  # Убираем "!" и "[]"
-    for var in variables:
-        # Заменяем переменные в выражении их значениями
-        expr = expr.replace(var, str(variables[var]))
+
+    # Подставляем значения переменных в выражение
+    def replace_variables(token):
+        if token in variables:  # Если токен - это переменная
+            value = variables[token]
+            if isinstance(value, list):  # Преобразуем массивы в строку
+                return repr(value)  # Используем repr для корректной подстановки массива
+            return str(value)  # Возвращаем строковое представление значения
+        return token  # Если это не переменная, оставляем как есть
+
+    # Заменяем переменные в выражении
+    tokens = re.split(r'(\W)', expr)  # Разделяем токены с учетом символов
+    processed_tokens = [replace_variables(token) for token in tokens if token.strip()]
+    processed_expr = ''.join(processed_tokens)
 
     try:
-        return eval(expr)
+        # Разрешаем только безопасные функции
+        result = eval(processed_expr, {"__builtins__": None}, {"len": len, "max": safe_max})
+        return result
     except Exception as e:
-        raise SyntaxError(f"Invalid expression: {expr}, error: {e}")
+        raise SyntaxError(f"Invalid expression: {processed_expr}, error: {e}")
+
+# Функция safe_max для безопасного нахождения максимального значения
+def safe_max(iterable):
+    # Проверяем, есть ли хотя бы один элемент
+    if not iterable:
+        return None
+
+    # Сортируем элементы, преобразуя их в строки для безопасного сравнения
+    try:
+        return max(iterable, key=lambda x: str(x))
+    except TypeError:
+        # В случае ошибки, если элементы несопоставимы, вернем None
+        return None
+
 
 # Класс для обработки конфигурации
 class ConfigParser:
@@ -24,7 +51,6 @@ class ConfigParser:
         lines = text.strip().split('\n')
         for line in lines:
             line = line.strip()
-            print(f"Parsing line: {line}")  # Для отладки
             if line.startswith('#('):
                 self.parse_array(line)
             elif 'is' in line:
@@ -33,25 +59,49 @@ class ConfigParser:
                 raise SyntaxError(f"Invalid statement: {line}")
 
     def parse_assignment(self, line):
-        print(f"Parsing assignment: {line}")  # Для отладки
         var_name, value = line.split(' is ')
         value = value.strip()
 
-        if value.startswith('!['):  # Это выражение
+        if value.startswith('!['):  # Это выражение, которое нужно вычислить
             value = evaluate_expression(value, self.variables)
         elif value.startswith('"') and value.endswith('"'):  # Это строка
-            value = value[1:-1]
+            value = value[1:-1]  # Убираем кавычки
         elif value.isdigit():  # Это число
             value = int(value)
         elif value.startswith('#('):  # Это массив
             value = self.parse_array(value)  # Массив обрабатываем через метод parse_array
+        else:
+            # Если это переменная, то берем её значение
+            value = self.variables.get(value, value)
+
         self.variables[var_name.strip()] = value
+
+    def handle_string_concatenation(self, value):
+        # Разделяем строку по символу "+" и обрабатываем каждую часть
+        parts = value.split('+')
+        processed_parts = []
+        for part in parts:
+            part = part.strip()
+            if part.startswith('"') and part.endswith('"'):
+                # Если это строка, удаляем кавычки и добавляем
+                processed_parts.append(part[1:-1])
+            elif part in self.variables:
+                # Если это переменная, подставляем ее значение
+                processed_parts.append(str(self.variables[part]))
+            else:
+                raise ValueError(f"Unknown part in concatenation: {part}")
+
+        # Соединяем все части в одну строку
+        return ''.join(processed_parts)
 
     def parse_array(self, line):
         # Убираем "#(" и ")"
         array_values = line[2:-1]
         # Разделяем по запятой и обрабатываем каждый элемент
-        elements = [self.parse_value(val.strip()) for val in array_values.split(',')]
+        elements = [
+            self.parse_value(val.strip())  # Используем parse_value для каждого элемента
+            for val in array_values.split(',')
+        ]
         return elements
 
     def parse_value(self, value):
