@@ -103,14 +103,22 @@ class ConfigParser:
     def parse_array(self, line):
         # Убираем "#(" и ")"
         array_values = line[2:-1]
+        # Если массив пустой, возвращаем пустой список
+        if not array_values.strip():
+            return []
+
         # Разделяем по запятой и обрабатываем каждый элемент
-        elements = [
-            self.parse_value(val.strip())  # Используем parse_value для каждого элемента
-            for val in array_values.split(',')
-        ]
+        elements = []
+        for val in array_values.split(','):
+            val = val.strip()
+            if not val:  # Если элемент пустой, выбрасываем исключение
+                raise SyntaxError(f"Invalid array syntax: empty element in {line}")
+            elements.append(self.parse_value(val))
         return elements
 
     def parse_value(self, value):
+        if not value:
+            raise ValueError("Value cannot be empty.")
         # Если это выражение (начинается с ![), то вычисляем
         if value.startswith('!['):
             return evaluate_expression(value, self.variables)
