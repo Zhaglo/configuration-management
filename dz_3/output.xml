@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config>
+    <variable name="x">10</variable>
+    <variable name="y">20</variable>
+    <variable name="name">John</variable>
+</config>
