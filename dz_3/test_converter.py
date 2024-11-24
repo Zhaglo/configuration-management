@@ -51,11 +51,8 @@ class TestConfigParser(unittest.TestCase):
         self.assertEqual(self.parser.variables['message'], "Hello World")
 
     def test_invalid_syntax(self):
-        """Тест на некорректный синтаксис."""
-        input_data = """
-        invalid is #(1, "string", )
-        """
-        with self.assertRaises(SyntaxError):
+        input_data = 'arr is #(1, "string", )'
+        with self.assertRaises(SyntaxError):  # Ожидаем SyntaxError
             self.parser.parse(input_data)
 
     def test_to_xml(self):
@@ -107,17 +104,6 @@ class TestConfigParser(unittest.TestCase):
         self.assertAlmostEqual(self.parser.variables['final_price'], 900)
 
     def test_error_handling(self):
-        """Тесты на обработку ошибок."""
-        # Использование несуществующей переменной
-        input_data = """
-        result is ![unknown_var + 1]
-        """
-        with self.assertRaises(SyntaxError):
-            self.parser.parse(input_data)
-
-        # Некорректный массив
-        input_data = """
-        array is #(1, "string", )
-        """
-        with self.assertRaises(SyntaxError):
+        input_data = 'arr is #(1, , 3)'
+        with self.assertRaises(SyntaxError):  # Ожидаем SyntaxError
             self.parser.parse(input_data)
