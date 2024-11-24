@@ -12,18 +12,24 @@ def evaluate_expression(expr, variables):
         if token in variables:  # Если токен - это переменная
             value = variables[token]
             if isinstance(value, list):  # Преобразуем массивы в строку
-                return repr(value)  # Используем repr для корректной подстановки массива
+                return repr(value)
+            elif isinstance(value, str):  # Если это строка, добавляем кавычки
+                return f'"{value}"'
             return str(value)  # Возвращаем строковое представление значения
         return token  # Если это не переменная, оставляем как есть
 
-    # Заменяем переменные в выражении
-    tokens = re.split(r'(\W)', expr)  # Разделяем токены с учетом символов
-    processed_tokens = [replace_variables(token) for token in tokens if token.strip()]
+    # Учитываем строки с кавычками и символы
+    tokens = re.split(r'("[^"]*"|\W)', expr)  # Учитываем строки в кавычках и разделители
+    processed_tokens = [
+        replace_variables(token) if not re.match(r'^".*"$', token) else token
+        for token in tokens if token.strip()
+    ]
     processed_expr = ''.join(processed_tokens)
 
     try:
-        # Разрешаем только безопасные функции
-        result = eval(processed_expr, {"__builtins__": None}, {"len": len, "max": safe_max})
+        # Указываем безопасные функции, доступные в выражении
+        safe_globals = {"__builtins__": None, "len": len, "max": max}
+        result = eval(processed_expr, safe_globals, {})
         return result
     except Exception as e:
         raise SyntaxError(f"Invalid expression: {processed_expr}, error: {e}")

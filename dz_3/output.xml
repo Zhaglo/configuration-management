@@ -9,10 +9,13 @@
     <variable name="div">0.6666666666666666</variable>
     <variable name="arr">
         <array>
-            <item>10</item>
-            <item>15</item>
-            <item>25</item>
+            <item>a</item>
+            <item>b</item>
+            <item>c</item>
         </array>
     </variable>
-    <variable name="max">25</variable>
+    <variable name="max">c</variable>
+    <variable name="part1">string</variable>
+    <variable name="part2">string</variable>
+    <variable name="res">string string</variable>
 </config>

@@ -5,5 +5,8 @@ add is ![x + y]
 sub is ![x - y]
 mult is ![x * y]
 div is ![x / y]
-arr is #(x, y, z)
+arr is #("a", "b", "c")
 max is ![max(arr)]
+part1 is "string"
+part2 is "string"
+res is ![part1 + " " + part2]
