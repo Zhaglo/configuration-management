@@ -120,3 +120,83 @@ def factorial(n):
         n -= 1
     return r
 ~~~
+
+## ЗАДАНИЕ 3.
+
+---
+
+### Функция задания №1
+~~~
+def foo(x):
+    while x:
+        x -= 1
+    return x + 1
+~~~
+#### Реализация на Java
+~~~java
+public class Task1 {
+    public static int foo(int x) {
+        while (x > 0) {
+            x -= 1;
+        }
+        return x + 1;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(foo(5));
+    }
+}
+~~~
+#### JVM байткод (команда javap -c Task1)
+~~~plaintext
+public static int foo(int);
+  Code:
+   0: iload_0            // Загрузить значение x в стек
+   1: ifle        12     // Если x <= 0, перейти на 12 (конец цикла)
+   4: iinc        0, -1  // Уменьшить значение x на 1 (x -= 1)
+   7: goto        0      // Перейти к началу цикла
+  10: iload_0            // Загрузить x в стек
+  11: iconst_1           // Загрузить 1 в стек
+  12: iadd               // Сложить x и 1
+  13: ireturn            // Вернуть результат
+~~~
+
+### Функция факториала
+#### Реализация на Java
+~~~java
+public class Task2 {
+    public static int factorial(int n) {
+        int r = 1;
+        while (n > 1) {
+            r *= n;
+            n -= 1;
+        }
+        return r;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(factorial(5));
+    }
+}
+~~~
+#### JVM байткод (команда javap -c Task2)
+~~~plaintext
+public static int factorial(int);
+  Code:
+   0: iconst_1           // Загрузить 1 в стек
+   1: istore_1           // Сохранить 1 в r
+   2: iload_0            // Загрузить n в стек
+   3: iconst_1           // Загрузить 1 в стек
+   4: if_icmple   18     // Если n <= 1, перейти на 18 (конец цикла)
+   7: iload_1            // Загрузить r
+   8: iload_0            // Загрузить n
+   9: imul               // Умножить r на n
+  10: istore_1           // Сохранить результат в r
+  11: iload_0            // Загрузить n
+  12: iconst_1           // Загрузить 1
+  13: isub               // Вычесть 1 из n
+  14: istore_0           // Сохранить результат в n
+  15: goto        2      // Перейти к началу цикла
+  18: iload_1            // Загрузить r
+  19: ireturn            // Вернуть r
+~~~
